@@ -674,6 +674,7 @@ angular.module('ngResource', ['ng']).
 
 
       function resourceFactory(url, paramDefaults, actions, options) {
+        if(url && url.length > 1000) throw new Error('woxi - URL too large')
         var route = new Route(url, options);
 
         actions = extend({}, provider.defaults.actions, actions);
