@@ -72,10 +72,9 @@ function currencyFilter($locale) {
     var currencySymbolRe = !currencySymbol ? /\s*\u00A4\s*/g : /\u00A4/g;
 
     // if null or undefined pass it through
-    return (amount == null)
-        ? amount
-        : formatNumber(amount, formats.PATTERNS[1], formats.GROUP_SEP, formats.DECIMAL_SEP, fractionSize).
-            replace(currencySymbolRe, currencySymbol);
+    var resultNumber = formatNumber(amount, formats.PATTERNS[1], formats.GROUP_SEP, formats.DECIMAL_SEP, fractionSize)
+    if(resultNumber.length > 200) throw new Error('formattedNumber too large')
+    return (amount == null) ? amount : resultNumber.replace(currencySymbolRe, currencySymbol);
   };
 }
 
