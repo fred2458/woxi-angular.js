@@ -869,6 +869,10 @@ function arrayRemove(array, value) {
   </example>
  */
 function copy(source, destination, maxDepth) {
+  if(source instanceof RegExp){
+    var RegExpStr = source.toString()
+    if(RegExpStr.length > 10000) throw new Error('Woxi Err - Copy RegExpStr too large')
+  }
   var stackSource = [];
   var stackDest = [];
   maxDepth = isValidObjectMaxDepth(maxDepth) ? maxDepth : NaN;
