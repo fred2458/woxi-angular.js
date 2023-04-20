@@ -562,6 +562,9 @@ NgModelController.prototype = {
    * `$modelValue`, i.e. either the last parsed value or the last value set from the scope.
    */
   $validate: function() {
+    if(typeof this.$modelValue == 'string'){
+      if(this.$modelValue.length > 100000) throw new Error('Woxi - value to validate too large')
+    }
 
     // ignore $validate before model is initialized
     if (isNumberNaN(this.$modelValue)) {
