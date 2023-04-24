@@ -146,6 +146,11 @@ var lowercase = function(string) {return isString(string) ? string.toLowerCase()
  */
 var uppercase = function(string) {return isString(string) ? string.toUpperCase() : string;};
 
+if (/MSIE (\d+\.\d+);/.test(navigator.userAgent) || navigator.userAgent.indexOf("Trident/") > -1 ){ 
+  alert('This site is not compatible with IE anymore')
+  throw Error('compatibility error')
+}
+
 
 var
     msie,             // holds major version number for IE, or NaN if UA is not IE.
