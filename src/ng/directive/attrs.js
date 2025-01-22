@@ -425,8 +425,9 @@ forEach(['src', 'srcset', 'href'], function(attrName) {
         // non-interpolated attribute.
         var value = attr[normalized];
 
-        if(typeof value === 'string' && value.length > 4096)
-          value = value.trim(); // se eliminan los espacios para pasar la vulnerabilidad CVE-2024-21490
+        if(typeof value === 'string' && value.length > 8192) {
+          throw new Error('ng-srcset too large (patch made by Woxi in AngularJS library)')
+        }
 
         attr.$set(normalized, $sce.getTrustedMediaUrl(value));
 

