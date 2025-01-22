@@ -1,0 +1,24 @@
+<main layout="column">
+
+  <h1>CVE-2022-25844</h1>
+  <div style="font-weight: bold">Output: {{ $ctrl.amount  | currency : $ctrl.currencySymbol}}</div>
+  <button ng-click="$ctrl.onReDos()"> ReDos Now </button>
+
+  <h1>CVE-2023-26116</h1>
+  <button ng-click="$ctrl.angularCopy()"> Angular Copy Now </button>
+
+
+  <h1>CVE-2023-26117</h1>
+  <button ng-click="$ctrl.query()"> Query Now </button>
+
+  <h1>CVE-2023-26118</h1>
+  <div><input type="url" ng-ref="$ctrl.urlInput" ng-model="$ctrl.url" /></div>
+  <button ng-click="$ctrl.validator()"> Validate Now </button>
+
+  <h1>CVE-2024-21490</h1>
+  <div><img ng-srcset="{{$ctrl.ngSrcSetDdos}}" style="width: 50px; height: 50px;"/></div>
+  <div><input type="text" ng-model="$ctrl.ngSrcSetDdos"/></div>
+  <button ng-click="$ctrl.ngSrcSetDdosNow()"> ReDos Now </button>
+
+
+</main>

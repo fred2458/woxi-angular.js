@@ -423,7 +423,12 @@ forEach(['src', 'srcset', 'href'], function(attrName) {
 
         // We need to sanitize the url at least once, in case it is a constant
         // non-interpolated attribute.
-        attr.$set(normalized, $sce.getTrustedMediaUrl(attr[normalized]));
+        var value = attr[normalized];
+
+        if(typeof value === 'string' && value.length > 4096)
+          value = value.trim(); // se eliminan los espacios para pasar la vulnerabilidad CVE-2024-21490
+
+        attr.$set(normalized, $sce.getTrustedMediaUrl(value));
 
         attr.$observe(normalized, function(value) {
           if (!value) {
