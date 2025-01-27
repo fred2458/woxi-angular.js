@@ -1,5 +1,5 @@
 /**
- * @license AngularJS_by_Woxi v1.8.4-local+sha.fa309ca60
+ * @license AngularJS_by_Woxi v1.8.4-local+sha.26cde46f3
  * 2023 Woxi (https://woxi.digital)
  * License: MIT
  */
@@ -99,7 +99,7 @@ function isValidObjectMaxDepth(maxDepth) {
 function minErr(module, ErrorConstructor) {
   ErrorConstructor = ErrorConstructor || Error;
 
-  var url = 'https://errors.angularjs.org/1.8.4-local+sha.fa309ca60/';
+  var url = 'https://errors.angularjs.org/1.8.4-local+sha.26cde46f3/';
   var regex = url.replace('.', '\\.') + '[\\s\\S]*';
   var errRegExp = new RegExp(regex, 'g');
 
@@ -2837,7 +2837,7 @@ function toDebugString(obj, maxDepth) {
 var version = {
   // These placeholder strings will be replaced by grunt's `build` task.
   // They need to be double- or single-quoted.
-  full: '1.8.4-local+sha.fa309ca60',
+  full: '1.8.4-local+sha.26cde46f3',
   major: 1,
   minor: 8,
   dot: 4,
@@ -2992,7 +2992,7 @@ function publishExternalAPI(angular) {
       });
     }
   ])
-  .info({ angularVersion: '1.8.4-local+sha.fa309ca60' });
+  .info({ angularVersion: '1.8.4-local+sha.26cde46f3' });
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -9419,9 +9419,6 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
 
       // first check if there are spaces because it's not the same pattern
       var trimmedSrcset = trim(value);
-      //                (   999x   ,|   999w   ,|   ,|,   )
-      var srcPattern = /(\s+\d+x\s*,|\s+\d+w\s*,|\s+,|,\s+)/;
-      var pattern = /\s/.test(trimmedSrcset) ? srcPattern : /(,)/;
 
       // separo por coma las tuplas uri descriptor y dejo solo las que no están vacías
       var splittedSrcset = trimmedSrcset.split(',').map(function(t){ return trim(t) }).filter(function(f){ return !!f })
@@ -11129,7 +11126,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
       }
       // All nodes with src attributes require a RESOURCE_URL value, except for
       // img and various html5 media nodes, which require the MEDIA_URL context.
-      if (attrNormalizedName === 'src' || attrNormalizedName === 'ngSrc') {
+      if (['src', 'ngSrc', 'srcset', 'ngSrcset'].indexOf(attrNormalizedName) !== -1) {
         if (['img', 'video', 'audio', 'source', 'track'].indexOf(nodeName) === -1) {
           return $sce.RESOURCE_URL;
         }
@@ -24621,9 +24618,6 @@ function sanitizeSrcset(value, $sce) {
 
   // first check if there are spaces because it's not the same pattern
   var trimmedSrcset = trim(value);
-  //                (   999x   ,|   999w   ,|   ,|,   )
-  var srcPattern = /(\s+\d+x\s*,|\s+\d+w\s*,|\s+,|,\s+)/;
-  var pattern = /\s/.test(trimmedSrcset) ? srcPattern : /(,)/;
 
   // separo por coma las tuplas uri descriptor y dejo solo las que no están vacías
   var splittedSrcset = trimmedSrcset.split(',').map(function(t){ return trim(t) }).filter(function(f){ return !!f })

@@ -24,129 +24,129 @@
   <div class="cve-2024-8372">
     <h1>CVE-2024-8372</h1>
     <p class="repro-images">
-        <!--<span class="section-header">-->
-          <!--Examples with <code>ngSrc</code><br />-->
-          <!--(not vulnerable)-->
-        <!--</span>-->
+        <span class="section-header">
+          Examples with <code>ngSrc</code><br />
+          (not vulnerable)
+        </span>
 
-        <!--<span>-->
-          <!--Image from <code>angularjs.org</code>:<br />-->
-          <!--<b>ALLOWED</b> (Correct ✔️)-->
-        <!--</span>-->
-        <!--<img ng-src="https://angularjs.org/favicon.ico" />-->
+        <span>
+          Image from <code>angularjs.org</code>:<br />
+          <b>ALLOWED</b> (Correct ✔️)
+        </span>
+        <img ng-src="https://angularjs.org/favicon.ico" />
 
-        <!--<span>-->
-          <!--Image from <code>angular.dev</code>:<br />-->
-          <!--<b>BLOCKED</b> (Correct ✔️)-->
-        <!--</span>-->
-        <!--<img ng-src="https://angular.dev/favicon.ico" />-->
+        <span>
+          Image from <code>angular.dev</code>:<br />
+          <b>BLOCKED</b> (Correct ✔️)
+        </span>
+        <img ng-src="https://angular.dev/favicon.ico" />
 
-        <!--<span>-->
-          <!--Arbitrary SVG image via data URL:<br />-->
-          <!--<b>BLOCKED</b> (Correct ✔️)-->
-        <!--</span>-->
-        <!--<img ng-src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCBmb250LXNpemU9IjEwMCIgeT0iMWVtIj7wn5Cx4oCN8J+SuzwvdGV4dD48L3N2Zz4=" />-->
+        <span>
+          Arbitrary SVG image via data URL:<br />
+          <b>BLOCKED</b> (Correct ✔️)
+        </span>
+        <img ng-src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCBmb250LXNpemU9IjEwMCIgeT0iMWVtIj7wn5Cx4oCN8J+SuzwvdGV4dD48L3N2Zz4=" />
 
-        <!--<span class="section-header">-->
-          <!--Examples with <code>ngSrcset</code><br />-->
-          <!--(vulnerable)-->
-        <!--</span>-->
+        <span class="section-header">
+          Examples with <code>ngSrcset</code><br />
+          (vulnerable)
+        </span>
 
-        <!--<span>-->
-          <!--Image from <code>angular.dev</code>:<br />-->
-          <!--<b>ALLOWED</b> (Error ❌)-->
-        <!--</span>-->
-        <!--<img ng-srcset="https://angularjs.org/favicon.ico xyz,https://angular.dev/favicon.ico" />-->
+        <span>
+          Image from <code>angular.dev</code>:<br />
+          <b>BLOCKED</b> (Correct ✔️)
+        </span>
+        <img ng-srcset="https://angularjs.org/favicon.ico xyz,https://angular.dev/favicon.ico" />
 
-        <!--<span>-->
-          <!--Arbitrary SVG image via data URL<br />-->
-          <!--<b>ALLOWED</b> (Error ❌)-->
-        <!--</span>-->
-        <!--<img ng-srcset="https://angularjs.org/favicon.ico xyz,data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCBmb250LXNpemU9IjEwMCIgeT0iMWVtIj7wn5Cx4oCN8J+SuzwvdGV4dD48L3N2Zz4=" />-->
+        <span>
+          Arbitrary SVG image via data URL<br />
+          <b>BLOCKED</b> (Correct ✔️)
+        </span>
+        <img ng-srcset="https://angularjs.org/favicon.ico xyz,data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCBmb250LXNpemU9IjEwMCIgeT0iMWVtIj7wn5Cx4oCN8J+SuzwvdGV4dD48L3N2Zz4=" />
 
-        <!--<span class="section-header">-->
-          <!--Examples with <code>ngAttrSrcset</code><br />-->
-          <!--(vulnerable)-->
-        <!--</span>-->
+        <span class="section-header">
+          Examples with <code>ngAttrSrcset</code><br />
+          (vulnerable)
+        </span>
 
-        <!--<span>-->
-          <!--Image from <code>angular.dev</code>:<br />-->
-          <!--<b>ALLOWED</b> (Error ❌)-->
-        <!--</span>-->
-        <!--<img ng-attr-srcset="https://angularjs.org/favicon.ico xyz,https://angular.dev/favicon.ico" />-->
+        <span>
+          Image from <code>angular.dev</code>:<br />
+          <b>BLOCKED</b> (Correct ✔️)
+        </span>
+        <img ng-attr-srcset="https://angularjs.org/favicon.ico xyz,https://angular.dev/favicon.ico" />
 
-        <!--<span>-->
-          <!--Arbitrary SVG image via data URL:<br />-->
-          <!--<b>ALLOWED</b> (Error ❌)-->
-        <!--</span>-->
-        <!--<img ng-attr-srcset="https://angularjs.org/favicon.ico xyz,data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCBmb250LXNpemU9IjEwMCIgeT0iMWVtIj7wn5Cx4oCN8J+SuzwvdGV4dD48L3N2Zz4=" />-->
+        <span>
+          Arbitrary SVG image via data URL:<br />
+          <b>BLOCKED</b> (Correct ✔️)
+        </span>
+        <img ng-attr-srcset="https://angularjs.org/favicon.ico xyz,data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCBmb250LXNpemU9IjEwMCIgeT0iMWVtIj7wn5Cx4oCN8J+SuzwvdGV4dD48L3N2Zz4=" />
 
-        <!--<span class="section-header">-->
-          <!--Examples with <code>ngPropSrcset</code><br />-->
-          <!--(vulnerable)-->
-        <!--</span>-->
+        <span class="section-header">
+          Examples with <code>ngPropSrcset</code><br />
+          (vulnerable)
+        </span>
 
-        <!--<span>-->
-          <!--Image from <code>angular.dev</code>:<br />-->
-          <!--<b>ALLOWED</b> (Error ❌)-->
-        <!--</span>-->
-        <!--<img ng-prop-srcset="'https://angularjs.org/favicon.ico xyz,https://angular.dev/favicon.ico'" />-->
+        <span>
+          Image from <code>angular.dev</code>:<br />
+          <b>BLOCKED</b> (Correct ✔️)
+        </span>
+        <img ng-prop-srcset="'https://angularjs.org/favicon.ico xyz,https://angular.dev/favicon.ico'" />
 
-        <!--<span>-->
-          <!--Arbitrary SVG image via data URL:<br />-->
-          <!--<b>ALLOWED</b> (Error ❌)-->
-        <!--</span>-->
-        <!--<img ng-prop-srcset="'https://angularjs.org/favicon.ico xyz,data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCBmb250LXNpemU9IjEwMCIgeT0iMWVtIj7wn5Cx4oCN8J+SuzwvdGV4dD48L3N2Zz4='" />-->
+        <span>
+          Arbitrary SVG image via data URL:<br />
+          <b>BLOCKED</b> (Correct ✔️)
+        </span>
+        <img ng-prop-srcset="'https://angularjs.org/favicon.ico xyz,data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCBmb250LXNpemU9IjEwMCIgeT0iMWVtIj7wn5Cx4oCN8J+SuzwvdGV4dD48L3N2Zz4='" />
     </p>
   </div>
   <div class="cve-2024-8373">
     <h1>CVE-2024-8373</h1>
       <p class="repro-images">
-    <!--<span class="section-header">-->
-      <!--Examples with <code>ngSrcset</code><br />-->
-      <!--(not vulnerable)-->
-    <!--</span>-->
+    <span class="section-header">
+      Examples with <code>ngSrcset</code><br />
+      (not vulnerable)
+    </span>
 
-    <!--<span>-->
-      <!--Image from <code>angular.dev</code>:<br />-->
-      <!--<b>BLOCKED</b> (Correct ✔️)-->
-    <!--</span>-->
-    <!--<picture>-->
-      <!--<source ng-srcset="https://angular.dev/favicon.ico" />-->
-      <!--<img src="" />-->
-    <!--</picture>-->
+    <span>
+      Image from <code>angular.dev</code>:<br />
+      <b>BLOCKED</b> (Correct ✔️)
+    </span>
+    <picture>
+      <source ng-srcset="https://angular.dev/favicon.ico" />
+      <img src="" />
+    </picture>
 
-    <!--<span>-->
-      <!--Arbitrary SVG image via data URL:<br />-->
-      <!--<b>BLOCKED</b> (Correct ✔️)-->
-    <!--</span>-->
-    <!--<picture>-->
-      <!--<source ng-srcset="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCBmb250LXNpemU9IjEwMCIgeT0iMWVtIj7wn5Cx4oCN8J+SuzwvdGV4dD48L3N2Zz4=" />-->
-      <!--<img src="" />-->
-    <!--</picture>-->
+    <span>
+      Arbitrary SVG image via data URL:<br />
+      <b>BLOCKED</b> (Correct ✔️)
+    </span>
+    <picture>
+      <source ng-srcset="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCBmb250LXNpemU9IjEwMCIgeT0iMWVtIj7wn5Cx4oCN8J+SuzwvdGV4dD48L3N2Zz4=" />
+      <img src="" />
+    </picture>
 
-    <!--<span class="section-header">-->
-      <!--Examples with <code>ngPropSrcset</code><br />-->
-      <!--(not vulnerable)-->
-    <!--</span>-->
+    <span class="section-header">
+      Examples with <code>ngPropSrcset</code><br />
+      (not vulnerable)
+    </span>
 
-    <!--<span>-->
-      <!--Image from <code>angular.dev</code>:<br />-->
-      <!--<b>BLOCKED</b> (Correct ✔️)-->
-    <!--</span>-->
-    <!--<picture>-->
-      <!--<source ng-prop-srcset="'https://angular.dev/favicon.ico'" />-->
-      <!--<img src="" />-->
-    <!--</picture>-->
+    <span>
+      Image from <code>angular.dev</code>:<br />
+      <b>BLOCKED</b> (Correct ✔️)
+    </span>
+    <picture>
+      <source ng-prop-srcset="'https://angular.dev/favicon.ico'" />
+      <img src="" />
+    </picture>
 
-    <!--<span>-->
-      <!--Arbitrary SVG image via data URL:<br />-->
-      <!--<b>BLOCKED</b> (Correct ✔️)-->
-    <!--</span>-->
-    <!--<picture>-->
-      <!--<source ng-prop-srcset="'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCBmb250LXNpemU9IjEwMCIgeT0iMWVtIj7wn5Cx4oCN8J+SuzwvdGV4dD48L3N2Zz4='" />-->
-      <!--<img src="" />-->
-    <!--</picture>-->
+    <span>
+      Arbitrary SVG image via data URL:<br />
+      <b>BLOCKED</b> (Correct ✔️)
+    </span>
+    <picture>
+      <source ng-prop-srcset="'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCBmb250LXNpemU9IjEwMCIgeT0iMWVtIj7wn5Cx4oCN8J+SuzwvdGV4dD48L3N2Zz4='" />
+      <img src="" />
+    </picture>
 
     <span class="section-header">
       Examples with <code>ngAttrSrcset</code><br />
@@ -155,7 +155,7 @@
 
     <span>
       Image from <code>angular.dev</code>:<br />
-      <b>ALLOWED</b> (Error ❌)
+      <b>BLOCKED</b> (Correct ✔️)
     </span>
     <picture>
       <source ng-attr-srcset="https://angular.dev/favicon.ico" />
@@ -164,7 +164,7 @@
 
     <span>
       Arbitrary SVG image via data URL:<br />
-      <b>ALLOWED</b> (Error ❌)
+      <b>BLOCKED</b> (Correct ✔️)
     </span>
     <picture>
       <source ng-attr-srcset="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCBmb250LXNpemU9IjEwMCIgeT0iMWVtIj7wn5Cx4oCN8J+SuzwvdGV4dD48L3N2Zz4=" />
@@ -178,7 +178,7 @@
 
     <span>
       Image from <code>angular.dev</code>:<br />
-      <b>ALLOWED</b> (Error ❌)
+      <b>BLOCKED</b> (Correct ✔️)
     </span>
     <picture>
       <source srcset="{{ 'https://angular.dev/favicon.ico' }}" />
@@ -187,7 +187,7 @@
 
     <span>
       Arbitrary SVG image via data URL:<br />
-      <b>ALLOWED</b> (Error ❌)
+      <b>BLOCKED</b> (Correct ✔️)
     </span>
     <picture>
       <source srcset="{{ 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCBmb250LXNpemU9IjEwMCIgeT0iMWVtIj7wn5Cx4oCN8J+SuzwvdGV4dD48L3N2Zz4=' }}" />

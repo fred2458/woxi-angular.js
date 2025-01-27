@@ -3795,7 +3795,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
       }
       // All nodes with src attributes require a RESOURCE_URL value, except for
       // img and various html5 media nodes, which require the MEDIA_URL context.
-      if (attrNormalizedName === 'src' || attrNormalizedName === 'ngSrc') {
+      if (['src', 'ngSrc', 'srcset', 'ngSrcset'].indexOf(attrNormalizedName) !== -1) {
         if (['img', 'video', 'audio', 'source', 'track'].indexOf(nodeName) === -1) {
           return $sce.RESOURCE_URL;
         }
