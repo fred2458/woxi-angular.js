@@ -2086,50 +2086,24 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
         throw $compileMinErr('srcset', 'Can\'t pass trusted values to `{0}`: "{1}"', invokeType, value.toString());
       }
 
-      if(value.length > 8192) {
-        throw new Error('ng-srcset too large (patch made by Woxi in AngularJS library)')
-      }
-
-      // Such values are a bit too complex to handle automatically inside $sce.
-      // Instead, we sanitize each of the URIs individually, which works, even dynamically.
-
-      // It's not possible to work around this using `$sce.trustAsMediaUrl`.
-      // If you want to programmatically set explicitly trusted unsafe URLs, you should use
-      // `$sce.trustAsHtml` on the whole `img` tag and inject it into the DOM using the
-      // `ng-bind-html` directive.
-
-      var result = '';
-
       // first check if there are spaces because it's not the same pattern
       var trimmedSrcset = trim(value);
-      //                (   999x   ,|   999w   ,|   ,|,   )
-      var srcPattern = /(\s+\d+x\s*,|\s+\d+w\s*,|\s+,|,\s+)/;
-      var pattern = /\s/.test(trimmedSrcset) ? srcPattern : /(,)/;
 
-      // split srcset into tuple of uri and descriptor except for the last item
-      var rawUris = trimmedSrcset.split(pattern);
+      // separo por coma las tuplas uri descriptor y dejo solo las que no están vacías
+      var splittedSrcset = trimmedSrcset.split(',').map(function(t){ return trim(t) }).filter(function(f){ return !!f })
 
-      // for each tuples
-      var nbrUrisWith2parts = Math.floor(rawUris.length / 2);
-      for (var i = 0; i < nbrUrisWith2parts; i++) {
-        var innerIdx = i * 2;
-        // sanitize the uri
-        result += $sce.getTrustedMediaUrl(trim(rawUris[innerIdx]));
-        // add the descriptor
-        result += ' ' + trim(rawUris[innerIdx + 1]);
+      // splitteo cada srcset por el primer espacio, que separa la uri con el descriptor
+      var tuples = splittedSrcset.map(function(m){ return m.split(' ', 2).map(function(x){ return trim(x) }) })
+
+      var result = ''
+      for(var i = 0; i < tuples.length; i++) {
+        result += $sce.getTrustedMediaUrl(tuples[i][0])
+        if(tuples[i][1]) result += (' ' + tuples[i][1]);
+        // agrego coma mientras haya uno más
+        if(i != (tuples.length - 1)) result += ','
       }
+      return result
 
-      // split the last item into uri and descriptor
-      var lastTuple = trim(rawUris[i * 2]).split(/\s/);
-
-      // sanitize the last uri
-      result += $sce.getTrustedMediaUrl(trim(lastTuple[0]));
-
-      // and add the last descriptor if any
-      if (lastTuple.length === 2) {
-        result += (' ' + trim(lastTuple[1]));
-      }
-      return result;
     }
 
 

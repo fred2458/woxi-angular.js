@@ -1,6 +1,11 @@
 // Create the module where our functionality can attach to
 let appModule = angular.module('app', []);
 
+appModule.config(['$compileProvider', $compileProvider => {
+  // para CVE-2024-8372 se limitan solo a imagenes de angularjs.or/
+  $compileProvider.imgSrcSanitizationTrustedUrlList(/^https:\/\/angularjs\.org\//);
+}]);
+
 
 
 // Controllers
@@ -16,7 +21,8 @@ function controller($locale, $timeout, $resource, $timeout, $scope, $compile) {
   ctrl.currencySymbol = '$';
   ctrl.amount = 100;
   ctrl.posPre = $locale.NUMBER_FORMATS.PATTERNS[1].posPre;
-  ctrl.ngSrcSetDdos = 'https://placehold.co/600x400,'
+  let exampleImgUrl = 'https://angularjs.org/favicon.ico' // usar esta que está habilitada mas arriba
+  ctrl.ngSrcSetDdos = `${exampleImgUrl},`
 
 
   ctrl.onPosPreChange = () => {
@@ -56,7 +62,7 @@ function controller($locale, $timeout, $resource, $timeout, $scope, $compile) {
 
   ctrl.ngSrcSetDdosNow = () => {
     try {
-        ctrl.ngSrcSetDdos = `https://placehold.co/600x400 2x, ${' '.repeat(2 ** 20)}http://example.com/image.png`
+        ctrl.ngSrcSetDdos = `http://example.com/image.png 2x, ${' '.repeat(2 ** 20)}${exampleImgUrl}`
         ctrl.ngSrcSetCompiledElem.html(`<img ng-srcset="${ctrl.ngSrcSetDdos}">`);
 
         const scope = ctrl.ngSrcSetCompiledElem.scope();

@@ -425,11 +425,10 @@ forEach(['src', 'srcset', 'href'], function(attrName) {
         // non-interpolated attribute.
         var value = attr[normalized];
 
-        if(typeof value === 'string' && value.length > 8192) {
-          throw new Error('ng-srcset too large (patch made by Woxi in AngularJS library)')
-        }
-
-        attr.$set(normalized, $sce.getTrustedMediaUrl(value));
+        if(attrName === 'srcset')
+          attr.$set(normalized, sanitizeSrcset(value, $sce));
+        else
+          attr.$set(normalized, $sce.getTrustedMediaUrl(value));
 
         attr.$observe(normalized, function(value) {
           if (!value) {
@@ -452,3 +451,28 @@ forEach(['src', 'srcset', 'href'], function(attrName) {
     };
   }];
 });
+
+
+function sanitizeSrcset(value, $sce) {
+  if (!value) {
+    return value;
+  }
+
+  // first check if there are spaces because it's not the same pattern
+  var trimmedSrcset = trim(value);
+
+  // separo por coma las tuplas uri descriptor y dejo solo las que no están vacías
+  var splittedSrcset = trimmedSrcset.split(',').map(function(t){ return trim(t) }).filter(function(f){ return !!f })
+
+  // splitteo cada srcset por el primer espacio, que separa la uri con el descriptor
+  var tuples = splittedSrcset.map(function(m){ return m.split(' ', 2).map(function(x){ return trim(x) }) })
+
+  var result = ''
+  for(var i = 0; i < tuples.length; i++) {
+    result += $sce.getTrustedMediaUrl(tuples[i][0])
+    if(tuples[i][1]) result += (' ' + tuples[i][1]);
+    // agrego coma mientras haya uno más
+    if(i != (tuples.length - 1)) result += ','
+  }
+  return result
+}
